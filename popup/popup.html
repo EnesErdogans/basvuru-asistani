@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<title>Başvuru Asistanı</title>
+<link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <header>
+    <div class="brand"><img src="../icons/icon32.png" alt=""><span>Başvuru Asistanı</span></div>
+    <button id="openPanel" class="ghost" title="Paneli aç">Panel ↗</button>
+  </header>
+
+  <div id="warn" class="warn" hidden></div>
+
+  <section class="card" id="jobCard">
+    <div class="muted small" id="jobSite">Sayfa okunuyor…</div>
+    <div class="jobTitle" id="jobTitle"></div>
+    <div class="muted" id="jobCompany"></div>
+    <div class="row" id="trackRow" hidden>
+      <button id="saveJob" class="secondary">＋ Kaydet</button>
+      <button id="appliedJob" class="secondary">✓ Başvurdum</button>
+    </div>
+    <div class="row" id="statusRow" hidden>
+      <label class="small muted" for="status">Durum</label>
+      <select id="status"></select>
+    </div>
+  </section>
+
+  <section class="card">
+    <label class="small muted" for="cv">CV</label>
+    <select id="cv"></select>
+    <label class="small muted" for="tpl">Ön yazı şablonu</label>
+    <select id="tpl"></select>
+    <button id="fill" class="primary">⚡ Formu doldur</button>
+    <div id="result" class="small result"></div>
+    <div class="legend small muted"><span class="dot g"></span>dolduruldu <span class="dot o"></span>sende <span class="dot r"></span>hassas, boş bırakıldı</div>
+  </section>
+
+  <footer>
+    <div class="stat"><b id="sTotal">0</b><span>başvuru</span></div>
+    <div class="stat"><b id="sWeek">0</b><span>bu hafta</span></div>
+    <div class="stat"><b id="sDue">0</b><span>takip bekliyor</span></div>
+  </footer>
+  <div class="kbd small muted">Kısayol: <kbd>Alt</kbd>+<kbd>Shift</kbd>+<kbd>F</kbd> doldur · <kbd>Alt</kbd>+<kbd>Shift</kbd>+<kbd>S</kbd> kaydet</div>
+
+  <script src="../src/core.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

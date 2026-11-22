@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Başvuru Paneli</title>
+<link rel="icon" href="../icons/icon32.png">
+<link rel="stylesheet" href="panel.css">
+</head>
+<body>
+<aside class="side">
+  <div class="brand"><img src="../icons/icon48.png" alt=""><div><b>Başvuru Asistanı</b><small>verilerin sadece bu tarayıcıda</small></div></div>
+  <nav id="nav">
+    <a data-tab="jobs" class="on">📋 Başvurular</a>
+    <a data-tab="profile">👤 Profil</a>
+    <a data-tab="cvs">📄 CV'ler</a>
+    <a data-tab="answers">💬 Hazır cevaplar</a>
+    <a data-tab="templates">✉️ Ön yazılar</a>
+    <a data-tab="settings">⚙️ Ayarlar</a>
+  </nav>
+  <div class="side-foot small muted">Alt+Shift+F doldur<br>Alt+Shift+S ilanı kaydet</div>
+</aside>
+
+<main>
+  <div id="welcome" class="banner" hidden>
+    <b>Hoş geldin!</b> Üç adımda hazırsın: <b>1)</b> Profilini doldur, <b>2)</b> CV'ni yükle, <b>3)</b> bir ilanda ⚡ <b>Doldur</b>'a bas.
+    Eklenti formu asla kendisi göndermez; son tıklama her zaman senin.
+    <button class="x" id="welcomeX" type="button">×</button>
+  </div>
+
+  <!-- BAŞVURULAR -->
+  <section id="tab-jobs" class="tab on">
+    <div class="head">
+      <h1>Başvurular</h1>
+      <div class="tools">
+        <input id="search" type="search" placeholder="Ara: şirket, pozisyon, not…">
+        <select id="siteFilter"><option value="">Tüm siteler</option></select>
+        <div class="seg"><button data-view="board" class="on">Pano</button><button data-view="list">Liste</button></div>
+        <button id="addJob" class="btn primary">＋ Elle ekle</button>
+      </div>
+    </div>
+    <div class="stats" id="stats"></div>
+    <div id="board" class="board"></div>
+    <div id="list" class="listview" hidden></div>
+  </section>
+
+  <!-- PROFİL -->
+  <section id="tab-profile" class="tab">
+    <div class="head"><h1>Profil</h1><span id="profileSaved" class="saved muted small"></span></div>
+    <p class="muted">Formlardaki standart alanlar buradan doldurulur. Değişiklikler otomatik kaydedilir. TC kimlik no, şifre, IBAN gibi bilgileri burada tutmuyoruz; eklenti o alanları bilerek boş bırakır.</p>
+    <form id="profileForm" class="pgrid" autocomplete="off"></form>
+  </section>
+
+  <!-- CV -->
+  <section id="tab-cvs" class="tab">
+    <div class="head"><h1>CV'ler</h1></div>
+    <p class="muted">PDF yükle (en fazla 5 MB). Türkçe ve İngilizce ayrı CV tutabilirsin; eklenti sayfanın diline göre uygun olanı seçer. Yıldızlı olan varsayılandır.</p>
+    <label class="drop" id="drop"><input type="file" id="cvFile" accept="application/pdf,.pdf,.doc,.docx" hidden><span>📎 CV dosyasını buraya sürükle ya da <u>seç</u></span></label>
+    <div id="cvList" class="stack"></div>
+  </section>
+
+  <!-- CEVAPLAR -->
+  <section id="tab-answers" class="tab">
+    <div class="head"><h1>Hazır cevaplar</h1><div class="tools"><input id="ansSearch" type="search" placeholder="Soru ara…"><button id="addAns" class="btn primary">＋ Yeni</button></div></div>
+    <p class="muted">Şirketlere özel sorulara (“Neden bizimle çalışmak istiyorsun?”, “Haftada kaç gün çalışabilirsin?” gibi) verdiğin cevaplar. Bir formda böyle bir soruyu elle cevaplayınca eklenti “Hatırlayayım mı?” diye sorar; benzer soru tekrar gelince kendisi doldurur.</p>
+    <div id="ansList" class="stack"></div>
+  </section>
+
+  <!-- ŞABLONLAR -->
+  <section id="tab-templates" class="tab">
+    <div class="head"><h1>Ön yazı şablonları</h1><button id="addTpl" class="btn primary">＋ Yeni şablon</button></div>
+    <p class="muted">Kullanabileceğin yer tutucular: <code>{sirket}</code> <code>{pozisyon}</code> <code>{ad}</code> <code>{soyad}</code> <code>{bolum}</code> <code>{universite}</code> <code>{telefon}</code> <code>{eposta}</code> <code>{sehir}</code> <code>{linkedin}</code> <code>{tarih}</code>. Şirket ve pozisyon ilan sayfasından otomatik alınır.</p>
+    <div id="tplList" class="stack"></div>
+  </section>
+
+  <!-- AYARLAR -->
+  <section id="tab-settings" class="tab">
+    <div class="head"><h1>Ayarlar</h1></div>
+    <div class="cardx stack">
+      <label class="sw"><input type="checkbox" data-set="floatingButton"> Sayfada yüzen “⚡ Doldur” butonunu göster</label>
+      <label class="sw"><input type="checkbox" data-set="highlight"> Doldurulan / eksik alanları renkle işaretle</label>
+      <label class="sw"><input type="checkbox" data-set="askOnApply"> “Başvur / Gönder”e basınca takibe eklemeyi sor</label>
+      <label class="sw"><input type="checkbox" data-set="overwrite"> Dolu alanların üzerine yaz</label>
+      <label class="inline">Takip hatırlatması: başvurudan <input type="number" min="1" max="60" data-set="followUpDays" class="num"> gün sonra</label>
+    </div>
+    <div class="cardx stack">
+      <b>Tüm sitelerde çalış</b>
+      <span class="muted small">Varsayılan olarak eklenti LinkedIn, Kariyer.net, Youthall, Workday, Greenhouse, Lever, SuccessFactors gibi sitelerde kendiliğinden çalışır. Diğer şirket kariyer sayfalarında da yüzen buton ve “Başvurdun mu?” sorusu çıksın istersen izin ver. İzin vermesen de her sitede eklenti simgesine basarak doldurabilirsin.</span>
+      <div><button id="permBtn" class="btn">İzin ver</button> <span id="permState" class="small muted"></span></div>
+    </div>
+    <div class="cardx stack">
+      <b>Yedek ve dışa aktarım</b>
+      <span class="muted small">Tarayıcı verisi silinirse her şey gider. Arada bir yedek al.</span>
+      <div class="row">
+        <button id="expJson" class="btn">⬇ Yedek (JSON)</button>
+        <label class="sw small"><input type="checkbox" id="expWithCv" checked> CV dosyalarını da ekle</label>
+      </div>
+      <div class="row">
+        <button id="impJson" class="btn">⬆ Yedekten geri yükle</button><input type="file" id="impFile" accept=".json,application/json" hidden>
+        <button id="expCsv" class="btn">⬇ Başvuruları CSV (Excel) indir</button>
+      </div>
+    </div>
+    <div class="cardx stack danger">
+      <b>Tüm verileri sil</b>
+      <span class="muted small">Profil, CV'ler, cevaplar ve tüm başvuru kayıtları silinir. Geri alınamaz.</span>
+      <div><button id="wipe" class="btn bad">Her şeyi sil</button></div>
+    </div>
+  </section>
+</main>
+
+<!-- İLAN DÜZENLEME -->
+<dialog id="jobDlg">
+  <form method="dialog" id="jobForm">
+    <div class="dlg-head"><h2 id="dlgTitle">Başvuru</h2><button value="cancel" class="x" formnovalidate>×</button></div>
+    <div class="dgrid">
+      <label>Pozisyon<input name="title" required></label>
+      <label>Şirket<input name="company"></label>
+      <label>Konum<input name="location"></label>
+      <label>Site<input name="site"></label>
+      <label class="full">İlan linki<div class="row"><input name="url" type="url"><a id="openUrl" class="btn" target="_blank">Aç ↗</a></div></label>
+      <label>Durum<select name="status"></select></label>
+      <label>Başvuru tarihi<input name="appliedAt" type="date"></label>
+      <label>Takip hatırlatması<input name="followUpAt" type="date"></label>
+      <label>Son başvuru<input name="deadline" type="date"></label>
+      <label>İletişim (İK / kişi)<input name="contact" placeholder="Ad, e-posta"></label>
+      <label>Gönderilen CV<select name="cvId"></select></label>
+      <label class="full">Notlar<textarea name="notes" rows="4" placeholder="Mülakat tarihi, sorulan sorular, maaş konuşması…"></textarea></label>
+    </div>
+    <details id="descBox"><summary>İlan metni (kaydedilen)</summary><pre id="desc"></pre></details>
+    <div id="hist" class="hist small muted"></div>
+    <div class="dlg-foot">
+      <button type="button" id="delJob" class="btn bad">Sil</button>
+      <span class="grow"></span>
+      <button type="button" id="followMail" class="btn">✉ Takip e-postası taslağı</button>
+      <button value="save" class="btn primary">Kaydet</button>
+    </div>
+  </form>
+</dialog>
+
+<div id="toast" class="toast" hidden></div>
+
+<script src="../src/core.js"></script>
+<script src="panel.js"></script>
+</body>
+</html>

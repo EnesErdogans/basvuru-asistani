@@ -1,0 +1,75 @@
+{
+  "manifest_version": 3,
+  "name": "Başvuru Asistanı",
+  "short_name": "Başvuru",
+  "version": "1.0.0",
+  "description": "İş ve staj başvurularında formları doldurur, CV'ni ekler ve başvurularını takip eder. Tüm veriler yalnızca bu tarayıcıda durur.",
+  "permissions": ["storage", "unlimitedStorage", "activeTab", "scripting", "alarms", "notifications", "contextMenus"],
+  "optional_host_permissions": ["<all_urls>"],
+  "host_permissions": [
+    "*://*.linkedin.com/*",
+    "*://*.kariyer.net/*",
+    "*://*.youthall.com/*",
+    "*://*.toptalent.co/*",
+    "*://*.anbeankampus.co/*",
+    "*://*.greenhouse.io/*",
+    "*://*.lever.co/*",
+    "*://*.myworkdayjobs.com/*",
+    "*://*.myworkdaysite.com/*",
+    "*://*.successfactors.com/*",
+    "*://*.successfactors.eu/*",
+    "*://*.sapsf.com/*",
+    "*://*.sapsf.eu/*",
+    "*://*.smartrecruiters.com/*",
+    "*://*.secretcv.com/*",
+    "*://*.yenibiris.com/*",
+    "*://*.indeed.com/*",
+    "*://*.glassdoor.com/*"
+  ],
+  "background": { "service_worker": "src/background.js" },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.linkedin.com/*",
+        "*://*.kariyer.net/*",
+        "*://*.youthall.com/*",
+        "*://*.toptalent.co/*",
+        "*://*.anbeankampus.co/*",
+        "*://*.greenhouse.io/*",
+        "*://*.lever.co/*",
+        "*://*.myworkdayjobs.com/*",
+        "*://*.myworkdaysite.com/*",
+        "*://*.successfactors.com/*",
+        "*://*.successfactors.eu/*",
+        "*://*.sapsf.com/*",
+        "*://*.sapsf.eu/*",
+        "*://*.smartrecruiters.com/*",
+        "*://*.secretcv.com/*",
+        "*://*.yenibiris.com/*",
+        "*://*.indeed.com/*",
+        "*://*.glassdoor.com/*"
+      ],
+      "js": ["src/core.js", "src/content.js"],
+      "run_at": "document_idle",
+      "all_frames": true,
+      "match_about_blank": true
+    }
+  ],
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_title": "Başvuru Asistanı",
+    "default_icon": { "16": "icons/icon16.png", "32": "icons/icon32.png", "48": "icons/icon48.png", "128": "icons/icon128.png" }
+  },
+  "options_page": "panel/panel.html",
+  "icons": { "16": "icons/icon16.png", "32": "icons/icon32.png", "48": "icons/icon48.png", "128": "icons/icon128.png" },
+  "commands": {
+    "fill-form": {
+      "suggested_key": { "default": "Alt+Shift+F" },
+      "description": "Bu sayfadaki başvuru formunu doldur"
+    },
+    "save-job": {
+      "suggested_key": { "default": "Alt+Shift+S" },
+      "description": "Bu ilanı takibe ekle"
+    }
+  }
+}
