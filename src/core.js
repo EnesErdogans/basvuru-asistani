@@ -57,7 +57,7 @@
 
     { key: 'university', label: 'Üniversite', group: 'Eğitim', placeholder: 'Üniversite adı',
       re: /\buniversit|\bschool\b|\bokul\b|\binstitution\b|\bcollege\b|egitim kurumu/, not: /high school|lise|bolum|department|major|year|yil|grade|ortalama|gpa/ },
-    { key: 'department', label: 'Bölüm', group: 'Eğitim', placeholder: 'Bilgisayar Mühendisliği',
+    { key: 'department', label: 'Bölüm', group: 'Eğitim', placeholder: 'Elektrik-Elektronik Mühendisliği',
       re: /\bmajor\b|field of study|\bdepartment\b|\bbolum\b|\bdiscipline\b|\bprogram\b|area of study/ },
     { key: 'degree', label: 'Eğitim düzeyi', group: 'Eğitim', options: ['Lisans', 'Yüksek Lisans', 'Doktora', 'Ön Lisans', 'Lise'],
       re: /\bdegree\b|education level|egitim (duzeyi|seviyesi|durumu)|\bderece\b|highest education|ogrenim durumu/ },
